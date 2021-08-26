@@ -1,0 +1,31 @@
+{% block content %}
+{% load static %}
+
+<link href="{% static 'ProyectoSernacApp/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+<link href="{% static 'ProyectoSernacApp/css/signin.css' %}" rel="stylesheet">
+
+<form class="form-signin" method="post">
+  {% csrf_token %}
+
+  <img class="mb-4" src="{% static 'ProyectoSernacApp/img/logo.png' %}" alt="" width="300" height="123">
+  <h1 class="h3 mb-3 fw-normal">Ingrese datos</h1>
+  
+  <p><label for="id_username"></label> <input type="text" name="username" autofocus autocapitalize="none"
+      autocomplete="username" maxlength="150" required id="id_username" class="form-control" id="floatingInput"
+      placeholder="Usuario"></p>
+  <p><label for="id_password"></label> <input type="password" name="password" autocomplete="current-password"
+      required id="id_password" class="form-control" id="floatingInput" placeholder="Contraseña"></p>
+      <div class="nav-item px-lg-4">
+        <a class="nav-link text-small text-center" type="submit" href="{% url 'change_password' %}"><u><i>Haz olvidado tu contrasena?</u></i</a>
+      </div>
+      
+  <button class="w-100 btn btn-lg btn-primary" type="submit" id="submit">Entrar</button>
+ 
+  <a class="nav-link text-small text-center" type="submit" href="{% url 'Registro' %}"><u><i>Crear Cuenta</u></i></a>
+
+
+
+
+{% endblock %}
+{% include "ProyectoSernacApp/Footer.html" %}
+</form>

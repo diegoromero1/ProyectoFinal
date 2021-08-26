@@ -1,0 +1,28 @@
+{% extends "ProyectoSernacApp/Login.html" %}
+{% load static %}
+{% block content %}
+<link href="{% static 'ProyectoSernacApp/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+<link href="{% static 'ProyectoSernacApp/css/signin.css' %}" rel="stylesheet">
+
+<form class="form-signin" method="post">
+    {% csrf_token %}
+
+    <img class="mb-4" src="{% static 'ProyectoSernacApp/img/logo.png' %}" alt="" width="300" height="123">
+    <h1 class="h3 mb-3 fw-normal">Ingrese datos</h1>
+    <p><label for="id_username"></label> <input type="text" name="username" maxlength="150" autofocus required
+            id="id_username" class="form-control" id="floatingInput" placeholder="Usuario"></p>
+    <p><label for="id_email"></label> <input type="email" name="email" required id="id_email" class="form-control"
+            id="floatingInput" placeholder="Correo electronico"></p>
+    <p><label for="id_password1"></label> <input type="password" name="password1" required id="id_password1"
+            class="form-control" id="floatingInput" placeholder="Contraseña"></p>
+    <p><label for="id_password2"></label> <input type="password" name="password2" required id="id_password2"
+            class="form-control" id="floatingInput" placeholder="Confirme Contraseña"></p>
+            
+    <button class="w-100 btn btn-lg btn-primary" type="submit" id="submit">Registrarse</button>
+    <a class="nav-link text-small text-center" type="submit" href="{% url 'login' %}"><u><i>Iniciar sesion</u></i></a>
+    
+
+
+{% endblock %}
+{% include "ProyectoSernacApp/Footer.html" %}
+</form>
