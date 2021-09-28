@@ -29,6 +29,11 @@ class Migration(migrations.Migration):
                 ('timestamp', models.DateTimeField(default=django.utils.timezone.now)),
                 ('content', models.TextField()),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='posts', to=settings.AUTH_USER_MODEL)),
+                ('first_name', models.CharField(blank=True, max_length=150, verbose_name='first name')),
+                ('last_name', models.CharField(blank=True, max_length=150, verbose_name='last name')),
+                ('email', models.EmailField(blank=True, max_length=254, verbose_name='email address')),
+
+
             ],
             options={
                 'ordering': ['-timestamp'],

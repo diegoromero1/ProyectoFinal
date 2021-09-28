@@ -12,6 +12,7 @@ class Post(models.Model):
     timestamp = models.DateTimeField(default=timezone.now)
     content = models.TextField()
 
+
     class Meta:
         ordering = ['-timestamp']
 
