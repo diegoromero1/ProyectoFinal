@@ -27,12 +27,11 @@ def Registro(request):
         formulario = CustomUserForm(data=request.POST)
         if formulario.is_valid():
             formulario.save()
-            user = authenticate(username=formulario.cleaned_data["username"], password=formulario.cleaned_data["password1"],
-                                email=formulario.cleaned_data["Correo",]
-                                )
-            login(request, user)
-            messages.success(request, "Te has registrado correctamente")
-            return redirect(to='Inicio.html')
+
+            #messages.success(request, "Te has registrado correctamente")
+            return redirect(to='Inicio')
+
+
         data["form"] = formulario
       
     return render(request,"ProyectoSernacApp/Registro.html", data)
