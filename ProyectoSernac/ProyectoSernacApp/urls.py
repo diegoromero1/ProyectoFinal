@@ -7,18 +7,16 @@ from django.contrib.auth import views as auth_views
 from django.conf.urls.static import static
 from django.contrib.auth.views import LoginView, LogoutView, PasswordResetView
 
-
-
-
-
+from ProyectoSernacApp.views import UserChangePasswordView
 
 urlpatterns = [
-    path('',views.Login, name = "Login"),
+
+    path('',views.Login, name = 'login'),
     path('login/', LoginView.as_view(template_name='ProyectoSernacApp/login.html'), name='login'),
 	path('logout/', LogoutView.as_view(template_name='ProyectoSernacApp/logout.html'), name='logout'),
     path('Inicio/',views.Inicio, name = "Inicio"),
     path('accounts/profile/', views.Inicio, name = "Dentro"),   ### LUEGO DE INICIAR SESION MANDA A ACCOUNTS/PROFILE AJUSTÉ PARA IR A INICIO###
     path('Registro',views.Registro, name = "Registro"),
-    url(r'^password/$', views.change_password, name='change_password'), ##CAMBIO PASSW
-    
+    path('change/password/',UserChangePasswordView.as_view(),name='change_password'),
+
 ]

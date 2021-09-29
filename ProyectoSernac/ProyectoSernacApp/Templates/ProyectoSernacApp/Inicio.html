@@ -40,7 +40,7 @@
         <ul class="navbar-nav mx-auto">
 
          <li class="nav-item active px-lg-4">
-            <a class="nav-link text-uppercase text-expanded" >Hola {{ user.username }}</a>
+            <a class="nav-link text-uppercase text-expanded" > {{ user.username}}</a>
           </li>
           <li class="nav-item px-lg-4">
             <a class="nav-link text-uppercase text-expanded" href="{% url 'login' %}">Login</a>
@@ -50,10 +50,10 @@
           </li>
          
           <li class="nav-item px-lg-4">
-            <a class="nav-link text-uppercase text-expanded" href="contacto.html">AQUI ALGUNA IDEA</a>
+            <a class="nav-link text-uppercase text-expanded" href="{% url 'change_password' %}">Cambio de datos</a>
           </li>
-          <li class="nav-item px-lg-4">
-            <a class="nav-link text-uppercase text-expanded" href="blog.html">AQUI ALGUNA IDEA</a>
+          <li class="nav-item">
+                 <a class="nav-link" href="{% url 'logout' %}">Logout</a>
           </li>
 
         </ul>
