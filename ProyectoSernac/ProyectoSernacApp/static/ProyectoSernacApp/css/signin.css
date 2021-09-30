@@ -1,14 +1,15 @@
 html,
 body {
   height: 100%;
-}
 
+}
 body {
   display: flex;
   align-items: center;
   padding-top: 100px;
   padding-bottom: 100px;
-  background-color: #6189f77c;
+  background-color: #f8f8f8;
+  
 }
 
 .form-signin {

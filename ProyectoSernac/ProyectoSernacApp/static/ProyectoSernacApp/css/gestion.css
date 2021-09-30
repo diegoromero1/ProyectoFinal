@@ -1,9 +1,8 @@
 body {
   font-family: 'Lora';
-  background: linear-gradient(rgba(47, 23, 15, 0.65), rgba(47, 23, 15, 0.65)), url("../img/bg_main.jpg");
+  background: linear-gradient(rgba(241, 240, 240, 0.65), rgba(255, 255, 255, 0.65)), url("../img/bg_main.jpg");
   background-attachment: fixed;
-  background-position: center;
-  background-size: cover;
+
 }
 
 h1,
@@ -20,7 +19,7 @@ p {
 }
 
 .text-faded {
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(250, 18, 18, 0.3);
 }
 
 .site-heading {
@@ -76,38 +75,36 @@ p {
 }
 
 .bg-faded {
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: rgba(189, 10, 10, 0.85);
 }
 
 #mainNav {
-  background-color: rgba(24, 64, 8);
+  background-color: rgba(252, 252, 252, 0.548);
   font-family: 'Raleway';
 }
 
-#mainNav .navbar-brand {
-  color: #ffffff;
+#mainNav .navbar-brand .nav-item .nav-link{
+  color: #0f61a7;
 }
 
 #mainNav .navbar-nav .nav-item .nav-link {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(15, 97, 167, 0.973);
   font-weight: 800;
 }
 
 #mainNav .navbar-nav .nav-item.active .nav-link {
-  color: #ffffff;
-  text-decoration: underline;
+  color: #0f61a7;
 }
 
 @media (min-width: 992px) {
   #mainNav .navbar-nav .nav-item .nav-link {
-    font-size: 0.9rem;
+    font-size: 1.5rem;
   }
-  #mainNav .navbar-nav .nav-item .nav-link:hover {
-    color: rgba(255, 255, 255, 0.4);
-    text-decoration: underline;
+  #mainNav .navbar-nav .nav-item .nav-link {
+    color: rgb(15, 97, 167);
   }
   #mainNav .navbar-nav .nav-item.active .nav-link:hover {
-    color: #ffffff;
+    color: #1728c4;
     text-decoration: underline;
   }
 }
@@ -134,8 +131,8 @@ p {
     left: 600;
     width: 60%;
     margin-top: 3rem;
-    background-color: rgba(24, 64, 8);
-    color: cornsilk;
+    background-color: rgba(255, 255, 255, 0.76);
+    color: rgb(5, 5, 5);
     position: absolute;
   }
   .intro .intro-text .intro-button {
@@ -162,8 +159,8 @@ p {
   position: relative;
   padding: 3rem;
   margin: 0.5rem;
-  background-color: rgba(24, 64, 8);
-  color: cornsilk;
+  background-color: rgb(252, 252, 252);
+  color: rgb(7, 7, 7);
 }
 
 .cta .cta-inner:before {
@@ -229,13 +226,13 @@ p {
 }
 
 .footer {
-   background-color: rgba(24, 64, 8, 0.8);
+   background-color: rgba(248, 250, 248, 0.8);
 }
 
 
 
 .btn {
-  box-shadow: 0px 3px 3px 0px rgba(33, 37, 41, 0.1);
+  box-shadow: 0px 3px 3px 0px rgba(250, 250, 250, 0.1);
 }
 
 

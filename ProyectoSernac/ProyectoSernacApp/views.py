@@ -15,6 +15,8 @@ from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User
 from django.views.generic.edit import FormView
 from django.urls import reverse_lazy
+from .forms import PasswordChangingForm
+from django.contrib.auth.views import PasswordChangeView
 
 
 
@@ -42,59 +44,9 @@ def Registro(request):
       
     return render(request,"ProyectoSernacApp/Registro.html", data)
 
+class PasswordsChangeView(PasswordChangeView):
+    form_class = PasswordChangingForm
+    success_url = reverse_lazy('password_success')
 
-class UserChangePasswordView(LoginRequiredMixin,FormView):
-    model = User
-    form_class = PasswordChangeForm
-    template_name = 'accounts/change_password.html'
-    success_url = reverse_lazy('Login')
-
-    @method_decorator(csrf_exempt)
-    def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(request, *args, **kwargs)
-
-    def get_form(self, form_class=None):
-        form = PasswordChangeForm(user=self.request.user)
-        form.fields['old_password'].widget.attrs['placeholder'] = 'Ingrese su contraseña actual'
-        form.fields['new_password1'].widget.attrs['placeholder'] = 'Ingrese su nueva contraseña'
-        form.fields['new_password2'].widget.attrs['placeholder'] = 'Repita su contraseña'
-        return form
-
-    def change_password(request):
-        if request.method == 'POST':
-            form = PasswordChangeForm(request.user, request.POST)
-            if form.is_valid():
-                user = form.save()
-                update_session_auth_hash(request, user)  # Important!
-                messages.success(request, 'Your password was successfully updated!')
-                return redirect('change_password')
-            else:
-                messages.error(request, 'Please correct the error below.')
-        else:
-            form = PasswordChangeForm(request.user)
-        return render(request, 'accounts/change_password.html', {
-        'form': form
-    })
-            
-
-
-
-
-'''
-## CAMBIO DE CONTRASEÑA ##
-def change_password(request):
-    if request.method == 'POST':
-        form = PasswordChangeForm(request.user, request.POST)
-        if form.is_valid():
-            user = form.save()
-            update_session_auth_hash(request, user)  # Important!
-            messages.success(request, 'Your password was successfully updated!')
-            return redirect('change_password')
-        else:
-            messages.error(request, 'Please correct the error below.')
-    else:
-        form = PasswordChangeForm(request.user)
-    return render(request, 'accounts/change_password.html', {
-        'form': form
-    })'''
-
+def password_success(request):
+    return render(request,'accounts/password_success.html', {})

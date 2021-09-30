@@ -23,7 +23,8 @@
 
   <h1 class="site-heading text-center text-white d-none d-lg-block">
 
-    <span class="site-heading-lower">Sernac Educativo</span>
+    <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{% static 'ProyectoSernacApp/img/titulo.png' %}" width="832" height="100"
+    alt="">
   </h1>
 
   
@@ -38,23 +39,29 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav mx-auto">
-
-         <li class="nav-item active px-lg-4">
-            <a class="nav-link text-uppercase text-expanded" > {{ user.username}}</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dopdown-toggle active" data-toggle = "dropdown" data-target="desplegable" href="#"> 
+              <img src="{% static 'ProyectoSernacApp/img/perfil.png' %}" width="35" height="35">
+              Bienvenido {{ user.username|title}}
+            </a>
+            
+            <div class="dropdown-menu">
+              <a class="dropdown-item"  href="{% url 'password_change' %}">
+                Cambio de contraseña
+              </a>
+              <a class="dropdown-item" href="{% url 'password_change' %}">
+                Editar Perfil
+              </a>
+            </div>
           </li>
-          <li class="nav-item px-lg-4">
-            <a class="nav-link text-uppercase text-expanded" href="{% url 'login' %}">Login</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link active mx-auto" href="{% url 'logout' %}"> 
+              <img src="{% static 'ProyectoSernacApp/img/salida.png' %}" width="35" height="35">
+              Cerrar Sesion
+            </a>
           </li>
-          <li class="nav-item px-lg-4">
-            <a class="nav-link text-uppercase text-expanded" href="{% url 'Registro' %}">Registrarse</a>
-          </li>
-         
-          <li class="nav-item px-lg-4">
-            <a class="nav-link text-uppercase text-expanded" href="{% url 'change_password' %}">Cambio de datos</a>
-          </li>
-          <li class="nav-item">
-                 <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-          </li>
+             
+          
 
         </ul>
       </div>
@@ -66,16 +73,8 @@
   <section class="page-section clearfix">
     <div class="container">
       <div class="intro">
-        <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{% static 'ProyectoSernacApp/img/principal.jpg' %}"
+        <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{% static 'ProyectoSernacApp/img/principal.png' %}" width="832" height="464"
           alt="">
-        <div class="intro-text left-0 text-center bg-faded p-5 rounded">
-          <h2 class="section-heading mb-4">
-            <span class="section-heading-upper">Puntualidad</span>
-            <span class="section-heading-lower">El mejor stock</span>
-          </h2>
-          <p class="mb-3">EL TULON DEL ROMERO
-            .
-          </p>
 
         </div>
       </div>
@@ -91,12 +90,10 @@
         <div class="col-xl-9 mx-auto">
           <div class="cta-inner text-center rounded">
             <h2 class="section-heading mb-4">
-              <span class="section-heading-upper">Compromiso total</span>
-              <span class="section-heading-lower">Garantizado</span>
+              <span class="section-heading-upper"></span>
+              <span class="section-heading-lower"></span>
             </h2>
-            <p class="mb-0">Con más de 75 años de experiencia a nuestras espaldas, desde Gestión de Pedidos tenemos los
-              conocimientos y herramientas necesarios para llevar cualquier objeto a la puerta de su casa con
-              puntualidad y profesionalidad.</p>
+            <p class="mb-0"></p>
           </div>
         </div>
       </div>
