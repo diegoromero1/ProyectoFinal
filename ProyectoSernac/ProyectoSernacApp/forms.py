@@ -19,6 +19,21 @@ class CustomUserForm(UserCreationForm):
               'last_name':'Apellidos',
               'email':'Correo',}
 
+class CustomUserProfileForm(UserCreationForm):
+
+    class Meta:
+        model= User
+        fields = [
+        'first_name',
+        'last_name',
+        'email',
+        ]
+    labels = {'username':'Nombre de usuario',
+              'first_name':'Nombre',
+              'last_name':'Apellidos',
+              'email':'Correo',}
+
+
 class PasswordChangingForm(PasswordChangeForm):
     old_password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control','type':'password','placeholder':'Ingrese su contraseña actual'}))
     new_password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control','type':'password','placeholder':'Ingrese nueva contraseña '}))

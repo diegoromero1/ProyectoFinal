@@ -5,7 +5,7 @@ from django.shortcuts import render, HttpResponse, redirect
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 
-from .forms import CustomUserForm
+from .forms import CustomUserForm, CustomUserProfileForm
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash, login, authenticate
@@ -50,3 +50,20 @@ class PasswordsChangeView(PasswordChangeView):
 
 def password_success(request):
     return render(request,'accounts/password_success.html', {})
+
+def Perfil(request):
+    data = {
+        'form': CustomUserProfileForm()
+    }
+    if request.method == 'POST':
+        formulario = CustomUserProfileForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+
+            #messages.success(request, "Tus datos se han actualizado Correctamente")
+            return redirect(to='Inicio')
+
+        data["form"] = formulario
+      
+    return render(request,"ProyectoSernacApp/Perfil.html", data)
+    

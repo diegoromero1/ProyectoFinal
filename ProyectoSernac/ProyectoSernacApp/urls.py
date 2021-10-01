@@ -19,5 +19,6 @@ urlpatterns = [
     path('Registro',views.Registro, name = "Registro"),
     path('password/',PasswordsChangeView.as_view(template_name='accounts/change_password.html'),name='password_change'),
     path('password_success',views.password_success,name="password_success"),
+    path('Perfil',views.Perfil, name = "Perfil"),
 
 ]
