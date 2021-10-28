@@ -1,1 +1,1 @@
-web: gunicorn ProyectoSernac.wsgi
+web: gunicorn ProyectoSernac.wsgi --log-file=-
