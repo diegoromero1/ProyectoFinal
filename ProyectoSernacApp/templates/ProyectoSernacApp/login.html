@@ -28,11 +28,13 @@
      
       <a class="nav-link text-small text-center" type="submit" href="{% url 'Registro' %}"><u><i>Crear Cuenta</u></i></a>
     
-     
-    
-    
-    {% endblock %}
-    {% include "ProyectoSernacApp/Footer.html" %}
+     {% if form.errors %}
+      <div class="alert alert-danger" role="alert">
+        Tu contraseña y/o usuario son incorrectos
+      </div>
+    {% endif %}
+
+
     </form>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     {% if messages %}   
@@ -46,11 +48,9 @@
         </script>
       {% endfor %}
     {% endif %}
-    {% if form.errors %}
-      <div class="alert alert-danger" role="alert">
-        Tu contraseña y/o usuario son incorrectos
-      </div>
-    {% endif %}
+
   </body>
 
 </html>
+{% include "ProyectoSernacApp/Footer.html" %}
+    {% endblock %}
