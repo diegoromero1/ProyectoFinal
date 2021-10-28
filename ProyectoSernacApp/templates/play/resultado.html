@@ -1,0 +1,42 @@
+{% extends "ProyectoSernacApp/login.html" %}
+{% load static %}
+{% block content %}
+<link href="{% static 'ProyectoSernacApp/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+<link href="{% static 'ProyectoSernacApp/css/signin.css' %}" rel="stylesheet">
+<div class="form-signin">
+
+   <div class="jumbotron my-4">
+       <h3 class="text-info">{{ respondida.pregunta.texto | safe }}</h3>
+       <p>
+           <strong>Tu respuesta</strong>
+           {{ respondida.respuesta.texto | safe }}
+       </p>
+       {% if respondida.respuesta.correcta %}
+       <h4 class="text-success">Excelente! Tu respuesta es correcta </h4>
+   {% else %}
+       <h4 class="text-danger">Tu respuesta es erronea </h4>
+           
+           {% for respuesta in respondida.pregunta.opciones.all  %}
+             {% if respuesta.correcta %}
+                 <h4>La respuesta correcta es: <span class="text-success"> </span>{{ respuesta }}</h4>
+                 {{ respuesta }}
+
+               {% endif %}
+           
+           {% endfor %}
+           
+
+   {%  endif %}
+
+   <a href="{% url 'jugar' %}">
+       <button class="btn-success">
+           Continuar con la siguiente pregunta
+       </button>
+   </a>
+
+   </div>
+
+
+</div>
+{% include "ProyectoSernacApp/Footer.html" %}
+{% endblock %}

@@ -1,0 +1,32 @@
+
+     {% extends "ProyectoSernacApp/login.html" %}
+     {% load static %}
+     {% block content %}
+         <link href="{% static 'ProyectoSernacApp/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+         <link href="{% static 'ProyectoSernacApp//css/signin.css' %}" rel="stylesheet">
+
+
+    <form action=""  class="form-signin", method="post">
+        {% csrf_token %}
+        <img class="mb-4" src="{% static 'ProyectoSernacApp/img/consulta1.png' %}" width="594" height="100">
+        <h1 class="h3 mb-3 fw-normal">Envie su consulta</h1>
+
+        <p><label for="id_first_name"></label> <input type="text" name="nombre" maxlength="150" autofocus required
+            id="id_first_name" class="form-control" id="floatingInput" placeholder="Nombre"></p>
+        <p><label for="id_last_name"></label> <textarea type="text" name="mensaje" maxlength="150" autofocus required
+            id="id_last_name" class="form-control" id="floatingInput" placeholder="Escriba aqui su consulta"></textarea> </p>
+     
+        <p></p><input type="text" name="mail" class = "form-control" placeholder="ejemplo@gmail.com"></p>
+        <p></p><input type="text" name="numero" class = "form-control" placeholder="ingrese su numero ej: 912345678"></p>
+
+        <button class="w-100 btn btn-lg btn-primary" href="{% url 'Educacion' %}">Enviar Consulta</button>
+        
+        <a class="nav-link text-small text-center" type="submit" href="{% url 'Educacion' %}"><u><i>Volver al menu</u></i></a>
+
+        {{ mensaje }}
+
+        {% endblock %}
+        {% include "ProyectoSernacApp/Footer.html" %}   
+
+    </form>
+

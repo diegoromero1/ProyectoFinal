@@ -1,0 +1,18 @@
+{% extends "ProyectoSernacApp/Educacion.html" %}
+{%load static%}
+{% block titulo %}
+    {{detalle_publicacion.titulo}}
+        <p>Categoria: {{detalle_publicacion.Categorias}}</p>
+{% endblock titulo %}
+{% block imagen_principal %} {% static 'ProyectoSernacApp/img/Derechos.png' %} {% endblock imagen_principal %}
+
+
+
+{% block contenido %}
+    <h1>{{detalle_publicacion.contenido | safe }}
+        <div class="col-md-5">
+            <img class="mb-4" src="{% static 'ProyectoSernacApp/img/Recomendacion.png' %}" width="500" height="500">
+        </div>
+    </h1>
+    
+{% endblock contenido %}

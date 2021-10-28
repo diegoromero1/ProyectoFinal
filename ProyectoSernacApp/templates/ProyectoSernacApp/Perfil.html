@@ -1,0 +1,27 @@
+{% extends "ProyectoSernacApp/login.html" %}
+{% load static %}
+{% block content %}
+<link href="{% static 'ProyectoSernacApp/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+<link href="{% static 'ProyectoSernacApp/css/signin.css' %}" rel="stylesheet">
+
+<form class="form-signin" method="post">
+    {% csrf_token %}
+
+    <img class="mb-4" src="{% static 'ProyectoSernacApp/img/silueta.png' %}" width="594" height="100">
+    <h1 class="h3 mb-3 fw-normal">Actualice sus datos</h1>
+
+    <p><label for="id_first_name"></label> <input type="text" name="first_name" maxlength="150" autofocus required
+            id="id_first_name" class="form-control" id="floatingInput" placeholder="Nombre"></p>
+    <p><label for="id_last_name"></label> <input type="text" name="last_name" maxlength="150" autofocus required
+            id="id_last_name" class="form-control" id="floatingInput" placeholder="Apellido"></p>
+    <p><label for="id_email"></label> <input type="email" name="email" required id="id_email" class="form-control"
+            id="floatingInput" placeholder="Correo electronico"></p>
+            
+    <button class="w-100 btn btn-lg btn-primary" href="{% url 'login' %}">Actualizar Datos</button>
+    <a class="nav-link text-small text-center" type="submit" href="{% url 'Educacion' %}"><u><i>Volver al menu</u></i></a>
+    
+
+
+{% endblock %}
+{% include "ProyectoSernacApp/Footer.html" %}
+</form>
