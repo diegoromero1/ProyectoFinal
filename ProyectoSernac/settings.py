@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-z9@gf9%asz0xmvp4sdkqs#5+8!w6sx8t$_@q(a(+^!tv^3ny!q
 DEBUG = True
 MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 
-ALLOWED_HOSTS = ['proyectosernac.herokuapp.com']
+ALLOWED_HOSTS = ['proyectosernac.herokuapp.com', '127.0.0.1']
 #CK EXTENDIDO
 CKEDITOR_CONFIGS = {
     'default': {
