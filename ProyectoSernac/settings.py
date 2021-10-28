@@ -27,12 +27,7 @@ MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 
 ALLOWED_HOSTS = ['proyectosernac.herokuapp.com', '127.0.0.1']
 #CK EXTENDIDO
-CKEDITOR_CONFIGS = {
-    'default': {
-        'toolbar': 'full',
-        
-    },
-}
+
 
 # Application definition
 
@@ -44,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ProyectoSernacApp',
-    'ckeditor',
+
 
 ]
 
