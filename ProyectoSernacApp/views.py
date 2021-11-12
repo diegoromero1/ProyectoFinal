@@ -1,3 +1,5 @@
+import os
+
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
@@ -6,6 +8,7 @@ from django.forms.widgets import CheckboxInput
 from django.shortcuts import render, HttpResponse, redirect
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import TemplateView
 from rest_framework.generics import get_object_or_404
 from django.conf import settings
 from django.template.loader import get_template
@@ -23,7 +26,7 @@ from django.views.generic.edit import FormView
 from django.urls import reverse_lazy
 from .forms import PasswordChangingForm, ContactoForm
 from django.contrib.auth.views import PasswordChangeView
-from .models import Categorias, QuizUsuario, Pregunta, PreguntasRespondidas, Contacto, Publicacion
+from .models import Categorias, QuizUsuario, Pregunta, PreguntasRespondidas, Contacto, Publicacion, FilesAdmin
 from django.db.models import Q 
 
 # Vistas de la pagina
@@ -50,6 +53,7 @@ def Educacion(request):
     queryset = request.GET.get("buscar")
     publicacion = Publicacion.objects.filter(estado = True)
 
+
     if queryset:
         publicacion = Publicacion.objects.filter(
              Q(titulo__icontains= queryset) | 
@@ -58,8 +62,13 @@ def Educacion(request):
         
     return render(request, "ProyectoSernacApp/Educacion.html", {'publicacion':publicacion})
 
+
 def Login(request):
-    return render(request, "ProyectoSernacApp/login.html")
+    archivo = FilesAdmin.objects.all()
+    context = {
+        'file': archivo
+               }
+    return render(request, 'ProyectoSernacApp/login.html',context)
 
 # Diego Romero
 # Registar quizUser
@@ -204,3 +213,43 @@ def consulta(request):
 
 ##### DIEGO CUEVAS######
 
+# Diego Romero
+# Descarga de archivos
+def download(request,path):
+    file_path = os.path.join(settings.MEDIA_ROOT,path)
+    if os.path.exists(file_path):
+        with open(file_path,'rb')as fh:
+            response=HttpResponse(fh.read(),content_type="adminupload")
+            response['Content-Disposition']='inline;filename='+os.path.basename(file_path)
+            return response
+
+    raise Http404
+
+
+def descarga(request):
+    archivo = FilesAdmin.objects.all()
+    context = {
+        'file': archivo
+               }
+    return render(request, 'ProyectoSernacApp/descarga.html',context)
+
+
+
+# Error 404 y 500
+class Error404View(TemplateView):
+    template_name = "Manejo_de_error/error_404.html"
+
+
+class Error505View(TemplateView):
+    template_name = "Manejo_de_error/error_500.html"
+
+    @classmethod
+    def as_error_view(cls):
+
+        v = cls.as_view()
+        def view(request):
+            r = v(request)
+            r.render()
+            return r
+        return view
+# Diego Romero

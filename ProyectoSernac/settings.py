@@ -22,11 +22,11 @@ BASE_DIR = os.path.dirname(os.path.dirname((os.path.abspath(__file__))))
 SECRET_KEY = 'django-insecure-z9@gf9%asz0xmvp4sdkqs#5+8!w6sx8t$_@q(a(+^!tv^3ny!q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 
 ALLOWED_HOSTS = ['proyectosernac.herokuapp.com', '127.0.0.1']
-#CK EXTENDIDO
+# CK EXTENDIDO
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'full',
@@ -88,7 +88,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'wk4s1e8bc7ibz6se',
         'USER': 'xzui3qqyza7v4mnd',
-        'TEST':{
+        'TEST': {
             'MIRROR': 'default'
         },
         'PASSWORD': 'orjmiqsujp1l04c0',
@@ -131,18 +131,28 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = '/static/'
-
 LOGIN_URL = "/login/"
 LOGOUT_REDIRECT_URL = "login"
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static', 'staticeducacion'),
-)
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+
+STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+
+if DEBUG:
+    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static', 'staticeducacion')]
+
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static', 'staticfiles')
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media_cdn')
+
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 """

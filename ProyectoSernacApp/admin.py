@@ -1,8 +1,11 @@
 from django.contrib import admin
 from .models import *
+from .models import FilesAdmin
 from .forms import ElegirInlineFormset
 
 # Register your models here.
+admin.site.register(FilesAdmin)
+
 admin.site.register(Profile)
 admin.site.register(Post)
 admin.site.register(Contacto)
@@ -45,4 +48,9 @@ admin.site.register(Pregunta, PreguntaAdmin)
 admin.site.register(ElegirRespuesta)
 admin.site.register(PreguntasRespondidas, PreguntasRespondidasAdmin)
 admin.site.register(QuizUsuario)
+
+
+
+
+
 # Diego Romero

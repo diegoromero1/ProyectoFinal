@@ -157,6 +157,8 @@
 
   <div class="container marketing">
 
+
+
     <!-- Three columns of text below the carousel -->
     <div class="row">
       <div class="col-lg-4">
@@ -176,9 +178,9 @@
       <div class="col-lg-4">
         <img class="mb-4" src="{% static 'ProyectoSernacApp/img/contrato.png' %}" width="140" height="140">
 
-        <h2>Contratos</h2>
-        <p>Las condiciones contratadas sólo pueden variar por acuerdo entre el cliente y la empresa.</p>
-        <p><a class="btn btn-secondary" href="#3">View details &raquo;</a></p>
+        <h2>Archivos coplementarios</h2>
+        <p>Aqui podras descargar los archivos necesarios para ampliar tus conociminetos</p>
+        <p><a class="btn btn-secondary" href="{% url 'descarga' %}">View details &raquo;</a></p>
         
 
       </div><!-- /.col-lg-4 -->
@@ -190,6 +192,7 @@
     <hr class="featurette-divider">
     {% block contenido %}
     {% if publicacion %}
+
         {% for p in publicacion %}
         <div class="row featurette">
           <div class="col-md-7" id="1" >

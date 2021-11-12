@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+       {% for post in file %}
+    <tr>
+          <br>
+        <th>{{forloop.counter}}</th>
+
+        <th>{{post.title}}</th>
+
+    <th><a href="{{post.adminupload.url}}" download ="{{post.adminupload.url}}"> Descargar archivo</a></th>
+         </tr>
+        {% endfor %}
+    <p><a class="btn btn-secondary" href="{% url 'Educacion' %}">Volver al inicio &raquo;</a></p>
+
+
+</head>
+<body>
+
+</body>
+</html>

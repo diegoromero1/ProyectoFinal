@@ -8,32 +8,34 @@ import random
 
 ####Mauro Silva el que te lo pone#####
 class Publicacion(models.Model):
-    id = models.AutoField(primary_key = True)
-    titulo = models.CharField('Titulo', max_length=90, blank = False, null = False)
-    slug = models.CharField('Slug', max_length=100, blank = False, null = False)
+    id = models.AutoField(primary_key=True)
+    titulo = models.CharField('Titulo', max_length=90, blank=False, null=False)
+    slug = models.CharField('Slug', max_length=100, blank=False, null=False)
     contenido = RichTextField('Contenido')
-    Categorias = models.ForeignKey('Categorias', on_delete= models.CASCADE)
-    estado = models.BooleanField('Categoria Activada/Categoria Desactivada', default = True)
+    Categorias = models.ForeignKey('Categorias', on_delete=models.CASCADE)
+    estado = models.BooleanField('Categoria Activada/Categoria Desactivada', default=True)
 
     class Meta:
         verbose_name = 'Publicacion'
         verbose_name_plural = 'Publicaciones'
-    
+
     def __str__(self):
         return self.titulo
 
 
-
 class Categorias(models.Model):
-    id = models.AutoField(primary_key = True)
-    nombre = models.CharField('Nombre de la categoria', max_length = 100 )
-    estado = models.BooleanField('Categoria Activada/Categoria Desactivada', default = True)
+    id = models.AutoField(primary_key=True)
+    nombre = models.CharField('Nombre de la categoria', max_length=100)
+    estado = models.BooleanField('Categoria Activada/Categoria Desactivada', default=True)
+
     class Meta:
         verbose_name = 'Categoria'
         verbose_name_plural = 'Categorias'
+
     def __str__(self):
         return self.nombre
-    
+
+
 #### Diego Cuevas ####
 class Contacto(models.Model):
     nombre = models.CharField(max_length=50)
@@ -67,7 +69,6 @@ class Post(models.Model):
 # Creacion de quiz
 
 class Pregunta(models.Model):
-
     NUMERO_DE_RESPUESTAS_PERMITIDAS = 1
 
     texto = models.TextField(verbose_name='Texto de la pregunta')
@@ -76,8 +77,8 @@ class Pregunta(models.Model):
     def __str__(self):
         return self.texto
 
-class QuizUsuario(models.Model):
 
+class QuizUsuario(models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE)
     puntaje_total = models.DecimalField(verbose_name='Puntaje total', default=0, decimal_places=2, max_digits=6)
 
@@ -87,7 +88,7 @@ class QuizUsuario(models.Model):
 
     def obtener_nuevas_preguntas(self):
         respondidas = PreguntasRespondidas.objects.filter(quizUser=self).values_list('pregunta__pk', flat=True)
-        preguntas_restantes = Pregunta.objects.exclude(pk__in = respondidas)
+        preguntas_restantes = Pregunta.objects.exclude(pk__in=respondidas)
         if not preguntas_restantes.exists():
             return None
         return random.choice(preguntas_restantes)
@@ -116,9 +117,6 @@ class QuizUsuario(models.Model):
         self.save()
 
 
-
-
-
 class ElegirRespuesta(models.Model):
     MAXIMO_RESPUESTA = 4
 
@@ -136,4 +134,13 @@ class PreguntasRespondidas(models.Model):
     respuesta = models.ForeignKey(ElegirRespuesta, on_delete=models.CASCADE, null=True)
     correcta = models.BooleanField(verbose_name='Es esta la respuesta correcta?', default=False, null=False)
     puntaje_obtenido = models.DecimalField(verbose_name='Puntaje Obtenido', default=0, decimal_places=2, max_digits=6)
+
+
+class FilesAdmin(models.Model):
+    adminupload = models.FileField(upload_to='media')
+    title = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.title
+
 # Diego Romero
