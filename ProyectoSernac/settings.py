@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-z9@gf9%asz0xmvp4sdkqs#5+8!w6sx8t$_@q(a(+^!tv^3ny!q
 # SECURITY WARNING: don't run with debug turned on in production!
 import socket
 
-if socket.gethostname() == '*.herokuapp.com':
+if socket.gethostname() == "proyectosernac.herokuapp.com":
     DEBUG = False
     ALLOWED_HOSTS = ['https://proyectosernac.herokuapp.com', ]
     ...
