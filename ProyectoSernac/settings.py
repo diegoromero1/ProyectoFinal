@@ -22,19 +22,11 @@ BASE_DIR = os.path.dirname(os.path.dirname((os.path.abspath(__file__))))
 SECRET_KEY = 'django-insecure-z9@gf9%asz0xmvp4sdkqs#5+8!w6sx8t$_@q(a(+^!tv^3ny!q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-import socket
-
-if socket.gethostname() == "proyectosernac.herokuapp.com":
-    DEBUG = False
-    ALLOWED_HOSTS = ['https://proyectosernac.herokuapp.com', ]
-    ...
-else:
-    DEBUG = True
-    ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+DEBUG = False
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 
-# ALLOWED_HOSTS = ['proyectosernac.herokuapp.com', '127.0.0.1', 'localhost','*']
+ALLOWED_HOSTS = ['proyectosernac.herokuapp.com', '127.0.0.1', 'localhost','*']
 # CK EXTENDIDO
 CKEDITOR_CONFIGS = {
     'default': {
@@ -145,6 +137,7 @@ LOGOUT_REDIRECT_URL = "login"
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
+
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static', 'staticeducacion')]
 
