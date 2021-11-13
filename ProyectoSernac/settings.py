@@ -22,8 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname((os.path.abspath(__file__))))
 SECRET_KEY = 'django-insecure-z9@gf9%asz0xmvp4sdkqs#5+8!w6sx8t$_@q(a(+^!tv^3ny!q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
+DEBUG = True
 MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 
 ALLOWED_HOSTS = ['proyectosernac.herokuapp.com', '127.0.0.1', 'localhost','*']
