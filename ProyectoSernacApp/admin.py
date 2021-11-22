@@ -1,23 +1,30 @@
 from django.contrib import admin
+
+
 from .models import *
 from .models import FilesAdmin
 from .forms import ElegirInlineFormset
 
 # Register your models here.
-admin.site.register(FilesAdmin)
 
+
+admin.site.register(FilesAdmin)
 admin.site.register(Profile)
 admin.site.register(Post)
+
+admin.site.register(Comentarios)
 admin.site.register(Contacto)
 
 
-#Mauro Silva   
+# Mauro Silva
 class CategoriasAdmin(admin.ModelAdmin):
-    search_fields = ['nombre',]
+    search_fields = ['nombre', ]
     list_display = ['nombre', 'estado']
+
 
 admin.site.register(Categorias, CategoriasAdmin)
 admin.site.register(Publicacion)
+
 
 # Diego Romero
 # quiz
@@ -37,20 +44,20 @@ class PreguntaAdmin(admin.ModelAdmin):
 
 
 class PreguntasRespondidasAdmin(admin.ModelAdmin):
-    list_display = ['pregunta', 'respuesta', 'correcta', 'puntaje_obtenido']
+    list_display = ['pregunta', 'respuesta', 'correcta', 'puntaje_obtenido','quizUser']
 
     class Meta:
         model = PreguntasRespondidas
 
 
-admin.site.register(Pregunta, PreguntaAdmin)
 
+class QuizUsuarioAdmin(admin.ModelAdmin):
+    list_display = ['usuario', 'puntaje_total']
+    model = QuizUsuario
+
+
+admin.site.register(Pregunta, PreguntaAdmin)
 admin.site.register(ElegirRespuesta)
 admin.site.register(PreguntasRespondidas, PreguntasRespondidasAdmin)
-admin.site.register(QuizUsuario)
-
-
-
-
-
+admin.site.register(QuizUsuario,QuizUsuarioAdmin)
 # Diego Romero

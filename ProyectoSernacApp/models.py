@@ -1,8 +1,20 @@
+from __future__ import unicode_literals
+
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 from django.utils import timezone
 from ckeditor.fields import RichTextField
+from django.conf import settings
+from django.db.models.signals import pre_save, post_save
+from django.utils.text import slugify
+from django.db import models
 
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.fields import GenericForeignKey
+
+
+from django.conf import settings
 import random
 
 
@@ -53,16 +65,85 @@ class Profile(models.Model):
         return f'Perfil de {self.user.username}'
 
 
+# Diego Romero
 class Post(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
-    timestamp = models.DateTimeField(default=timezone.now)
-    content = models.TextField()
 
-    class Meta:
-        ordering = ['-timestamp']
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    texto = models.TextField(max_length=200, blank=True, null=True)
+    slug = models.SlugField(unique=True, blank=True)
+    tiempo = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.user.username}: {self.content}'
+        return self.slug
+
+    def get_absolute_url(self):
+        return reverse("post_idd", kwargs={"pk": self.pk})
+
+    def comentarios(self):
+        instance = self
+        qs = Comentarios.objects.filtro_por_instancia(instance)
+        return qs
+
+    def get_content_type(self):
+        content_type = ContentType.objects.get_for_model(Post)
+        return content_type
+
+
+def nueva_url(instance, url=None):
+    slug = slugify(instance.texto)
+
+    if url is not None:
+        slug = url
+
+    qs = Post.objects.filter(slug=slug).order_by("-id")
+
+    if qs.exists():
+        nueva_url_si = "%s-%s" % (slug, qs.first().id)
+        return nueva_url(instance, url=nueva_url_si)
+    return slug
+
+
+def url_creada(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        instance.slug = nueva_url(instance)
+
+
+pre_save.connect(url_creada, sender=Post)
+
+
+class ComentariosManager(models.Manager):
+
+    def filtro_por_instancia(self, instance):
+        content_type = ContentType.objects.get_for_model(instance.__class__)
+        obj_id = instance.id
+        qs = super(ComentariosManager, self).filter(content_type=content_type, object_id=obj_id).filter(padre=None)
+        return qs
+
+
+class Comentarios(models.Model):
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
+    texto = models.TextField(verbose_name="Comentario")
+
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE,null=True)
+    object_id = models.PositiveIntegerField(null=True)
+    content_object = GenericForeignKey('content_type', 'object_id')
+    objects = ComentariosManager()
+
+    padre = models.ForeignKey("self", null=True, blank=True, on_delete=models.CASCADE)
+
+    tiempo = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-tiempo']
+
+    def __str__(self):
+        return self.texto[:15]
+
+    def get_absolute_url(self):
+        return reverse("comentario_id", kwargs={"pk": self.pk})
+
+    def hijo(self):
+        return Comentarios.objects.filter(padre=self)
 
 
 # Diego Romero
@@ -129,6 +210,7 @@ class ElegirRespuesta(models.Model):
 
 
 class PreguntasRespondidas(models.Model):
+
     quizUser = models.ForeignKey(QuizUsuario, on_delete=models.CASCADE, related_name='intentos')
     pregunta = models.ForeignKey(Pregunta, on_delete=models.CASCADE)
     respuesta = models.ForeignKey(ElegirRespuesta, on_delete=models.CASCADE, null=True)
@@ -136,6 +218,7 @@ class PreguntasRespondidas(models.Model):
     puntaje_obtenido = models.DecimalField(verbose_name='Puntaje Obtenido', default=0, decimal_places=2, max_digits=6)
 
 
+# Descarga de archivos
 class FilesAdmin(models.Model):
     adminupload = models.FileField(upload_to='media')
     title = models.CharField(max_length=50)

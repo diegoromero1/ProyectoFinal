@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'ProyectoSernacApp',
     'ckeditor',
 
+
 ]
 
 MIDDLEWARE = [

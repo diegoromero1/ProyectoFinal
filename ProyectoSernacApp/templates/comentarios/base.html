@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		{% block titulo %}
+		{% endblock %}
+	</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+</head>
+<body>
+
+	<div class="contenedor_main">
+
+		{%  block main %}
+
+		{% endblock %}
+
+	</div>
+
+</body>
+
+<style>
+
+	*{
+		margin: 0;
+		padding: 0;
+	}
+
+	body{
+		background: #f3f3f3;
+	}
+
+
+
+</style>
+
+</html>

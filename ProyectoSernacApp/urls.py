@@ -10,16 +10,15 @@ from django.contrib.auth.views import LoginView, LogoutView, PasswordResetView
 from django.conf.urls.static import static
 from django.views.static import serve
 
-
-from .views import Detallepublicaciones, PasswordsChangeView, jugar, resultado_pregunta, tablero
+from .views import Detallepublicaciones, PasswordsChangeView, jugar, resultado_pregunta, tablero, post_idd, \
+    eliminarComentarios, comentario_id, misconsultas
 from . import views
 
 urlpatterns = [
 
-    url(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
-    url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
-
-
+    url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+    url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
+    url(r'^comentario_id/(?P<pk>\d+)/$', comentario_id, name="comentario_id"),
     path('', LoginView.as_view(template_name='ProyectoSernacApp/login.html'), name='login'),
     path('logout/', LogoutView.as_view(template_name='ProyectoSernacApp/logout.html'), name='logout'),
     path('accounts/profile/', views.Educacion, name="Dentro"),
@@ -30,6 +29,12 @@ urlpatterns = [
     path('password_success', views.password_success, name="password_success"),
     path('Perfil', views.Perfil, name="Perfil"),
     path('descarga/', views.descarga, name="descarga"),
+    path('misconsultas/', misconsultas, name='misconsultas'),
+    path('post/', views.post, name="post"),
+    url(r'^post_id/(?P<pk>\d+)/$', post_idd, name="post_idd"),
+    url(r'^comentario_id/(?P<pk>\d+)/$', comentario_id, name="comentario_id"),
+
+    url(r'^eliminar/(?P<id>\d+)/$', eliminarComentarios, name="eliminar"),
 
     path('reset_password/', auth_views.PasswordResetView.as_view(template_name='accounts/password_reset.html'),
          name='reset_password'),
@@ -53,5 +58,7 @@ urlpatterns = [
     path('Educacionfinanciera/', views.Educacionfinanciera, name="Educacionfinanciera"),
     path('Consumoresponsable/', views.Consumoresponsable, name="Consumoresponsable"),
     path('<slug:slug>/', Detallepublicaciones, name="Detalle_publicaciones"),
+
+
 
 ]

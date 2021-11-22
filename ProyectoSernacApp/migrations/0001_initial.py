@@ -65,18 +65,7 @@ class Migration(migrations.Migration):
                 ('respuesta', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='ProyectoSernacApp.elegirrespuesta')),
             ],
         ),
-        migrations.CreateModel(
-            name='Post',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('timestamp', models.DateTimeField(default=django.utils.timezone.now)),
-                ('content', models.TextField()),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='posts', to=settings.AUTH_USER_MODEL)),
-            ],
-            options={
-                'ordering': ['-timestamp'],
-            },
-        ),
+
         migrations.AddField(
             model_name='elegirrespuesta',
             name='pregunta',
