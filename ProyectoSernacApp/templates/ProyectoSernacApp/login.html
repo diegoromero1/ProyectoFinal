@@ -1,6 +1,19 @@
 {% block content %}
 {% load static %}
 
+<!-- REDIRIGE SI ESTAS CONECTADO -->
+
+{% if user.is_authenticated %}
+
+
+<!-- CAMBIAR X LINK DEL SERVIDOR -->
+
+<meta http-equiv="refresh" content="0; url=accounts/profile/" />
+
+<!-- FIN REDIRECCION -->
+
+{% else %}
+
 <link href="{% static 'ProyectoSernacApp/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 <link href="{% static 'ProyectoSernacApp/css/signin.css' %}" rel="stylesheet">
 
@@ -55,4 +68,6 @@
 
 </html>
 {% include "ProyectoSernacApp/Footer.html" %}
+{% endif %}
+
     {% endblock %}

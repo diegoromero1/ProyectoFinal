@@ -1,21 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <th> {{ user.username}}</th>
+
+     {% extends "ProyectoSernacApp/login.html" %}
+
+     {% load static %}
+     {% block content %}
+     <link href="{% static 'ProyectoSernacApp/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+     <img class="mb-4" src="{% static 'ProyectoSernacApp/img/consulta1.png' %}" width="594" height="100">
+     <meta charset="UTF-8">
+
+
+<div class="main_div">
+   <h2> Bienvenido {{ user.username}}</h2>
     {% for post in consultas %}
+    <article class="feed_one feed_principal">
+
     <tr>
 
           <br>
-        {{forloop.counter}}
+        {{forloop.counter}}.-
 
         <th>{{post}}</th>
 
+    </tr>
+        </article>
+            {% endfor %}
 
-         </tr>
-        {% endfor %}
-</head>
-<body>
 
-</body>
-</html>
+
+
+	<p><a class="btn btn-secondary" href="{% url 'Educacion' %}">Volver al inicio &raquo;</a></p>
+
+</div>
+
+
+<style>
+
+	.main_div{
+		width: 55%;
+		margin: 100px auto;
+	}
+
+	.feed_principal{
+		margin-bottom: 15px;
+		padding: 15px 20px 0;
+		background: rgb(95, 187, 222);
+		border-radius: 5px;
+	}
+
+</style>
+     {% include "ProyectoSernacApp/Footer.html" %}
+     {% endblock %}
+
+

@@ -31,16 +31,22 @@
                         {{ opciones.texto }}
                 </label>
                 </div>
+
             {% endfor %}
 
             <button type="submit" class="btn btn-success">
                  Enviar
             </button>
 
+
         </form>
     </div>
  </div>
 
+<a class="nav-link active mx-auto" href="{% url 'Educacion' %}">
+                <img src="{% static 'ProyectoSernacApp/img/salida.png' %}" width="35" height="35">Volver al Inicio</a>
 </div>
+
+
 {% endif %}
 {% endblock %}

@@ -12,16 +12,12 @@ autobahn==21.3.1
 Automat==20.2.0
 automium==0.2.6
 automium-web==0.1.1
-awsebcli==3.20.2
 backports.entry-points-selectable==1.1.1
 billiard==3.6.4.0
 binaryornot==0.4.4
-boto3==1.20.8
-botocore==1.23.8
 Brotli==1.0.9
 cached-property==1.5.2
 celery==5.2.1
-cement==3.0.4
 certifi==2021.10.8
 cffi==1.15.0
 channels==3.0.4
@@ -176,3 +172,6 @@ wrapt==1.13.3
 xhtml2pdf==0.2.5
 zope.event==4.5.0
 zope.interface==5.4.0
+cement==3.0.4
+django-admin-interface
+

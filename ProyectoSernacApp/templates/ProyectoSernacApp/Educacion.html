@@ -1,5 +1,8 @@
 {% load static %}
-<!doctype html>
+
+{% if user.is_authenticated %}
+
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -12,7 +15,7 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/carousel/">
 
-    
+
 
     <!-- Bootstrap core CSS -->
 <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -33,12 +36,12 @@
       }
     </style>
 
-    
+
     <!-- Custom styles for this template -->
     <link href="{% static 'ProyectoSernacApp//css/carousel.css' %}"  rel="stylesheet">
   </head>
   <body>
-    
+
 <header>
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container-fluid">
@@ -51,6 +54,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        {% if user.is_authenticated and not user.is_staff %}
             <li class="nav-item me-2">
               <a class="nav-link active mx-auto"  href="{% url 'password_change' %}">
                 Cambio de contraseña
@@ -61,18 +65,28 @@
                 Editar Perfil
               </a>
             </li>
+        {% endif %}
+        {% if user.is_authenticated and user.is_staff %}
           <li class="nav-item me-2">
-            <a class="nav-link active mx-auto" href="{% url 'logout' %}"> 
+            <a class="nav-link active mx-auto" href="{% url 'admin' %}">
+              Panel de administracion
+            </a>
+          </li>
+        {% endif %}
+          <li class="nav-item me-2">
+            <a class="nav-link active mx-auto" href="{% url 'logout' %}">
               Cerrar Sesion
             </a>
           </li>
         </ul>
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        {% if user.is_authenticated and not user.is_staff %}
           <li class="nav-item me-2">
             <a class="nav-link active mx-auto" href="{% url 'Consulta' %}">
                 Consulta
             </a>
           </li>
+        {% endif %}
           <li class="nav-item me-2">
             <a class="nav-link active" aria-current="page" href="{% url 'jugar' %}">Test</a>
           </li>
@@ -160,16 +174,18 @@
 
 
     <!-- Three columns of text below the carousel -->
+
     <div class="row">
+      {% if user.is_authenticated and not user.is_staff %}
       <div class="col-lg-4">
         <img class="mb-4" src="{% static 'ProyectoSernacApp/img/publico.png' %}" width="140" height="140">
-        
-        <h2>Público general</h2>
-        <p>Esta línea de trabajo se enfoca en temáticas de consumo responsable, las cuales se organizan en torno a tres ejes: los derechos y deberes del consumidor, consumo sustentable y educación financiera.</p>
-        <p><a class="btn btn-secondary" href="#1">View details &raquo;</a></p>
+        <h2>Mis Consultas</h2>
+        <p>En esta parte puedes ver las consultas que has realizado.</p>
+        <p><a class="btn btn-secondary" href="{% url 'misconsultas' %}">Ver Consultas &raquo;</a></p>
       </div><!-- /.col-lg-4 -->
+      {% endif %}
       <div class="col-lg-4">
-        <img class="mb-4" src="{% static 'ProyectoSernacApp/img/migrantes.png' %}" width="140" height="140">
+        <img class="mb-4" src="{% static 'ProyectoSernacApp/img/foro.png' %}" width="140" height="140">
 
         <h2>Foro</h2>
         <p>Aqui podras interactuar con otros usuarios, expresar tus opiniones con libertad pero siempre con respeto hacia los demas.</p>
@@ -181,14 +197,14 @@
         <h2>Archivos coplementarios</h2>
         <p>Aqui podras descargar los archivos necesarios para ampliar tus conociminetos.</p>
         <p><a class="btn btn-secondary" href="{% url 'descarga' %}">Mostrar detalles &raquo;</a></p>
-        
+
 
       </div><!-- /.col-lg-4 -->
     </div><!-- /.row -->
 
 
     <!-- START THE FEATURETTES -->
-  
+
     <hr class="featurette-divider">
     {% block contenido %}
     {% if publicacion %}
@@ -198,18 +214,18 @@
           <div class="col-md-7" id="1" >
             <a href = "{% url 'Detalle_publicaciones' p.slug %}">
                 <h2 class="featurette-heading">{{ p.titulo }}<span class="text-muted"></span></h2>
-              </a> 
-                <h3 class="lead">
+              </a>
+                <h3 class="lead"> </h3>
                   {{ p.contenido | safe }}
                 </p>
-            
+
             </div>
                 <div class="col-md-5">
                 <img class="mb-4" src="{% static 'ProyectoSernacApp/img/Recomendacion.png' %}" width="500" height="500">
                 </div>
           <hr class="featurette-divider">
         {% endfor %}
-          
+
         </div>
     {% else %}
           <h1>No existen publicaciones</h1>
@@ -217,7 +233,7 @@
   {% endblock contenido %}
 
 
-  
+
 
     <!-- /END THE FEATURETTES -->
 
@@ -238,6 +254,31 @@
 
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 
-      
+
   </body>
 </html>
+
+{% else %}
+
+    
+{% load static %}
+
+<link href="{% static 'ProyectoSernacApp/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+<link href="{% static 'ProyectoSernacApp/css/signin.css' %}" rel="stylesheet">
+
+<html>
+  <body>
+    
+    
+    <form class="form-signin" method="post">
+      {% csrf_token %}
+      
+      <p><h1 class="text-center w-100">Necesitas iniciar sesion {{ user.username|title}}</h1></p>
+      <p><a class="text-center w-100 btn btn-lg btn-primary" type="submit" href="{% url 'login' %}">Iniciar sesion</a></p>
+      <a class="nav-link text-small text-center" type="submit" href="{% url 'Registro' %}"><u><i>Crear Cuenta</u></i></a>
+    
+    </form>
+  </body>
+
+</html>
+{% endif %}

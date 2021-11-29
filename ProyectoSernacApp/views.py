@@ -226,6 +226,19 @@ def consulta(request):
     return render(request, "ProyectoSernacApp/Consulta.html", data)
 
 
+def misconsultas(request):
+    name = request.user.username
+    consultas = Contacto.objects.filter(nombre=name)
+
+    context = {
+
+        'consultas': consultas
+
+    }
+
+    return render(request, 'ProyectoSernacApp/misconsultas.html', context)
+
+
 ##### DIEGO CUEVAS######
 
 # Diego Romero
@@ -375,17 +388,5 @@ def eliminarComentarios(request, id):
 # Diego Romero
 
 
-def misconsultas(request):
-
-    name = request.user.username
-    consultas = Contacto.objects.filter(nombre=name)
-
-
-
-    context = {
-
-        'consultas': consultas
-
-    }
-
-    return render(request, 'ProyectoSernacApp/misconsultas.html', context)
+def Admin(request):
+    return render(request, "ProyectoSernacApp/admin.html")

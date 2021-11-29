@@ -37,6 +37,7 @@ CKEDITOR_CONFIGS = {
 # Application definition
 
 INSTALLED_APPS = [
+    'admin_interface',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,9 +46,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ProyectoSernacApp',
     'ckeditor',
+    'colorfield',
 
 
 ]
+
+X_FRAME_OPTIONS='SAMEORIGINS'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -120,7 +124,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es'
 
 TIME_ZONE = 'UTC'
 
@@ -159,5 +163,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'andresarenas.kaiser@gmail.com'
+EMAIL_HOST_USER = 'sernac.educativo@gmail.com'
 EMAIL_HOST_PASSWORD = 'kaiser1234.'

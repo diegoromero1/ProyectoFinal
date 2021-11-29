@@ -49,6 +49,7 @@ urlpatterns = [
          name='password_reset_complete'),
     path('jugar/', jugar, name='jugar'),
     path('resultado/<int:pregunta_respondida_pk>/', resultado_pregunta, name='resultado'),
+    path('admin/', views.Admin, name="admin"),
     path('tablero/', tablero, name='tablero'),
     path('Consulta/', views.consulta, name="Consulta"),
     path('Perfil/<id>/', views.Perfil, name="Perfil"),
@@ -58,7 +59,7 @@ urlpatterns = [
     path('Educacionfinanciera/', views.Educacionfinanciera, name="Educacionfinanciera"),
     path('Consumoresponsable/', views.Consumoresponsable, name="Consumoresponsable"),
     path('<slug:slug>/', Detallepublicaciones, name="Detalle_publicaciones"),
-
+     
 
 
 ]

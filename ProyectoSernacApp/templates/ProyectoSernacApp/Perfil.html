@@ -6,8 +6,9 @@
 
 <form class="form-signin" method="post">
     {% csrf_token %}
-
+    <a class="navbar-brand" href="{% url 'Educacion' %}">
     <img class="mb-4" src="{% static 'ProyectoSernacApp/img/silueta.png' %}" width="594" height="100">
+    </a>
     <h1 class="h3 mb-3 fw-normal">Actualice sus datos</h1>
 
     <p><label for="id_first_name"></label> <input type="text" name="first_name" maxlength="150" autofocus required

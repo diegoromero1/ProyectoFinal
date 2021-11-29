@@ -1,10 +1,22 @@
 {% extends 'comentarios/base.html' %}
 {%  block main %}
-
+{% load static %}
+<link href="{% static 'ProyectoSernacApp/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+<link href="{% static 'ProyectoSernacApp/css/foro.css' %}" rel="stylesheet">
+<body>
+<div class="row">
+        	<div class="col-sm-12">
+                <a class="navbar-brand" href="{% url 'Educacion' %}">
+                    <br>
+                    <img src="{% static 'ProyectoSernacApp/img/titulo.png' %}" width="350" height="50" alt="">
+	            </a>
+        	</div>
+        </div>
+	</body>
 <div class="main_div">
 
 	<article class="feed_one feed_principal">
-		
+
 		<header class="titulo_header">
 			<h2 class="big">
 				{{instance.texto}}
@@ -12,15 +24,16 @@
 		</header>
 
 		<div class="feed_propiedad">
-			
-			<div class="feed_avatar">
-				<a href="" style="background-image:url();" class="UserAvatar">
-					
-				</a>
-			</div>
 
+<!--			<div class="feed_avatar">
+				<a href="" style="background-image:url();" class="UserAvatar">
+
+				</a>
+				</br>
+			</div>
+			!-->
 			<div class="feed_detalles">
-				
+
 				<div class="feed_meta feed_meta_owner">
 					<a class="userOnline" style="display: flex;" href="">
 						{{instance.usuario.username}}
@@ -31,9 +44,9 @@
 				<form method="POST">
 					{% csrf_token %}
 					{{form.as_p}}
-					
 
-					<button class="b_comentar" type="submit">Comenta</button>
+
+					<button class="b_comentar" type="submit">Comentar</button>
 
 				</form>
 
@@ -44,39 +57,63 @@
 	</article>
 
 	<header>
-		
+		<span class="contar_reply">
 		{% if ver_comentarios.count > 1 %}
 			Hay {{ver_comentarios.count}}<strong> comentarios </strong>
 		{% else %}
 			Hay {{ver_comentarios.count}}<strong> comentario </strong>
 		{% endif %}
-
-
+		</span>
 	</header>
-	
+
 
 	{% for ver_comentarios in ver_comentarios %}
 	<div class="div_ver_comentarios">
 
 		<strong>
-			{{ver_comentarios.usuario}} <small>{{ver_comentarios.tiempo}}</small>
+			{{ver_comentarios.usuario}}:</br> <small>{{ver_comentarios.tiempo}}</small>
 		</strong>
-
+		 <div class="jumbotron bg-Ash Gray text-black" >
 		<p class="p_comentario">
 			 {{ver_comentarios.texto}} <span></span>
 		</p>
-
+		</div>
 		{% if request.user == ver_comentarios.usuario %}
-		<a href="{% url 'eliminar' ver_comentarios.id %}">
-			Eliminar Comentario
-		</a>
+		<p><a class="btn btn-secondary" href="{% url 'eliminar' ver_comentarios.id %}">Eliminar comentario &raquo;</a></p>
 		{% else %}
 		{% endif %}
 
 		<button class="b_responder" style="display: block">
 				Responder
 				</button>
+
+
 		<div class="abrir_caja_reply">
+
+
+
+
+	    <span class="contar_reply">
+			{{ver_comentarios.hijo.count}} Respuesta{% if ver_comentarios.hijo.count > 1 %}s{% endif %}
+		</span>
+
+		{% if ver_comentarios.hijo.count > 0 %}
+		    {% for respuesta in ver_comentarios.hijo %}
+
+					 <div class="">
+                          <p class="p_comentario">
+                              <strong>
+                                   {{respuesta.usuario}}:
+                                  <small>{{ver_comentarios.tiempo}}</small>
+                              </strong>
+
+                          <p>
+                              {{respuesta.texto}}
+                          </p>
+						 </p>
+
+		{% endfor %}
+		{% endif %}
 		<form method="POST">
 			{% csrf_token %}
 			<input type="hidden" name="padre_identificador" value="{{ver_comentarios.id}}">
@@ -87,37 +124,6 @@
 			</button>
 
 		</form>
-
-
-
-	    <span class="contar_reply">]
-			{{ver_comentarios.hijo.count}} Respuesta{% if ver_comentarios.hijo.count > 1 %}s{% endif %}
-		</span>
-
-		{% if ver_comentarios.hijo.count > 0 %}
-		    {% for respuesta in ver_comentarios.hijo %}
-
-					  <div class="">
-						  <p class="p_comentario">
-							  <strong>
-								   {{respuesta.usuario}}
-							  </strong>
-
-						  <span>
-							  {{respuesta.texto}}
-						  </span>
-						  </p>
-					  </div>
-
-		{% endfor %}
-		{% endif %}
-
-
-
-
-
-
-
 	</div>
 	<hr>
 	{% empty %}
@@ -127,7 +133,7 @@
 		</h1>
 
 	{% endfor %}
-<p><a class="btn btn-secondary" href="{% url 'post' %}">Volver al post &raquo;</a></p>
+
 </div>
 
 <script>
@@ -136,150 +142,7 @@
 		$(this).next(".abrir_caja_reply").fadeToggle()
 	})
 </script>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-
-p, h1, h2, h3, small{
-	font-family: 'Roboto', sans-serif;
-
-}
-
-.p_comentario{
-	margin: 10px 0;
-	font-weight: 500;
-
-}
-
-.b_responder{
-	background: #00bcd4;
-	color: white;
-	padding: 5px 10px;
-	border-radius: 5px;
-	border: none;
-	font-size: 13px;
-	border-bottom: 5px solid #03a9f4;
-}
-
-.contar_reply{
-	width: 100px;
-	padding: 3px;
-	display: block;
-	font-size: 13px;
-	text-align: center;
-	margin: 10px 0;
-	cursor: pointer;
-	color: #fff;
-	background: #333;
-	border-radius: 50px;
-}
-
-.btn_enviar{
-	background: #00bcd4;
-	color: white;
-	padding: 5px 10px;
-	border-radius: 5px;
-	border: none;
-	font-size: 13px;
-	border-bottom: 5px solid #03a9f4;
-}
-
-.abrir_caja_reply{
-	display: none;
-}
-.div_ver_comentarios{
-	margin: 10px 0;
-}
-
-.main_div{
-	width: 55%;
-	margin: 100px auto;
-}
-
-.feed_principal{
-	margin-bottom: 15px;
-	padding: 15px 20px 0;
-	position: relative;
-	background: #8bf0f1;
-	border-radius: 5px;
-}
-
-.titulo_header{
-	margin-bottom: 10px;
-	word-wrap: break-word;
-}
-
-#id_texto{
-
-	box-sizing: border-box;
-	font:inherit;
-	direction: ltr;
-	outline: none;
-	padding: 7px;
-	border-radius: 5px;
-	border:1px solid #dee0e1;
-	min-width: 100%;
-	width: 100%;
-	max-width: 100%;
-	min-height: 50px;
-	max-height: 50px;
-	height: 50px;
-}
-
-.big{
-	font-weight: bold;
-	font-size: 19px;
-	display: inline;
-	margin: 5px;
-	line-height: 1.3;
-}
-
-.feed_propieda{
-	display: table;
-	width: 100%;
-}
-
-.feed_avatar{
-	display: table-cell;
-	width: 45px;
-}
-
-.UserAvatar{
-	background: transparent no-repeat 0 0;
-	background-size: 100%;
-	position: relative;
-	display: block;
-	margin-right: 15px;
-	float: left;
-	border-radius: 50%;
-	width: 35px;
-	height: 35px;
-}
-
-.feed_detalles{
-	font-size: 12px;
-	display: table-cell;
-	vertical-align: middle;
-}
-
-.feed_meta{
-	color: #b2b2bb;
-}
-
-.btn_comentar{
-	border:none;
-	padding: 7px;
-	width: 150px;
-	outline: none;
-	cursor: pointer;
-	display: block;
-	margin: 10px auto;
-	color: #ffF;
-	background: #333;
-	border-radius: 5px;
-}
-
-
-</style>
-
-
+</div>
+</div>
+<p><a class="btn btn-secondary" href="{% url 'post' %}">Volver al Foro&raquo;</a></p>
 {% endblock %}

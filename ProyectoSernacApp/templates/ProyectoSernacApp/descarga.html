@@ -1,23 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
+{% load static %}
+<link href="{% static 'ProyectoSernacApp/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+<link href="{% static 'ProyectoSernacApp/css/descarga.css' %}" rel="stylesheet">
+<div class="row">
+            <div class="col-sm-12">
+                <a class="navbar-brand" href="{% url 'Educacion' %}">
+                    <br>
+                    <img src="{% static 'ProyectoSernacApp/img/titulo.png' %}" width="350" height="50" alt="">
+                </a>
+            </div>
+        </div>
 <head>
-
+     <h1 align="center" class="h1 mb-1 fa-twitter">Bienvenido a la descarga de archivos</h1>
+<body>
 
        {% for post in file %}
+    <div class="jumbotron my-2/">
     <tr>
           <br>
+
         <th>{{forloop.counter}}</th>
 
         <th>{{post.title}}</th>
+        <br>
+            <br>
+    <img class="mb-4" src="{% static 'ProyectoSernacApp/img/Download.png' %}" alt="" width="40" height="40">
+
 
     <th><a href="{{post.adminupload.url}}" download ="{{post.adminupload.url}}"> Descargar archivo</a></th>
+        <br>
          </tr>
+    </div>
         {% endfor %}
+
     <p><a class="btn btn-secondary" href="{% url 'Educacion' %}">Volver al inicio &raquo;</a></p>
 
-
-</head>
-<body>
 
 </body>
 </html>

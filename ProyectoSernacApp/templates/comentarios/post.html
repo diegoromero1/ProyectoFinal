@@ -1,14 +1,27 @@
 {% extends 'comentarios/base.html' %}
 {%  block main %}
-
+{% load static %}
+<link href="{% static 'ProyectoSernacApp/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+<link href="{% static 'ProyectoSernacApp/css/foro.css' %}" rel="stylesheet">
+<head>
+<div class="row">
+        	<div class="col-sm-12">
+                <a class="navbar-brand" href="{% url 'Educacion' %}">
+                    <br>
+                    <img src="{% static 'ProyectoSernacApp/img/titulo.png' %}" width="350" height="50" alt="">
+	            </a>
+        	</div>
+        </div>
 <div class="main_div">
-	
+	<head>
+		<h1 align="center" class="h1 mb-1 fa-twitter">Bienvenido al foro de Sernac!</h1>
+	<br>
 	{% for post in post %}
 		<article class="feed_one feed_principal">
-			
+
 			<header class="titulo_header">
 				<h2 class="big">
-					
+
 				{{post.texto}}
 
 				</h2>
@@ -16,9 +29,9 @@
 
 			<div class="feed_propieda">
 
-				<div class="feed_avatar">
+				<!--<div class="feed_avatar">
 					<a style="background-image: url();" class="userAvatar"></a>
-				</div>
+				</div>!-->
 
 
 				<div class="feed_detalles">
@@ -27,6 +40,7 @@
 							{{post.usuario}}
 						</a>
 					</div>
+					<br>
 
 					<a href="{% url 'post_idd' post.pk %}">
 						<button class="b_comentar">
@@ -35,7 +49,7 @@
 					</a>
 
 				</div>
-				
+
 			</div>
 
 		</article>
@@ -51,83 +65,4 @@
 	<p><a class="btn btn-secondary" href="{% url 'Educacion' %}">Volver al inicio &raquo;</a></p>
 
 </div>
-
-<style>
-	
-	.main_div{
-		width: 55%;
-		margin: 100px auto;
-	}
-
-	.feed_principal{
-		margin-bottom: 15px;
-		padding: 15px 20px 0;
-		background: #66e5e7;
-		border-radius: 5px;
-	}
-
-	.feed_one{
-		position: relative;
-
-	}
-
-
-	.titulo_header{
-		margin-bottom: 10px;
-		word-wrap: break-word;
-	}
-
-	.big{
-		margin-right: 5px;
-		margin-left: 0px;
-		font-weight: bold;
-		font-size: 19px;
-		display: inline;
-		line-height: 1.3;
-	}
-
-	.feed_propieda{
-		display: table;
-		width: 100%;
-	}
-
-	.feed_avatar{
-		display: table-cell;
-		width: 45px;
-	}
-
-	.userAvatar{
-		background-size: 100%;
-		position: relative;
-		display: block;
-		margin-right: 15px;
-		float: left;
-		border-radius: 50%;
-		width: 35px;
-		height: 35px;
-	}
-
-	.feed_detalles{
-		display: table-cell;
-		vertical-align: middle;
-	}
-
-	.feed_meta{
-		color: #b2b2b2;
-	}
-
-	.b_comentar{
-		outline: none;
-		border:none;
-		padding: 10px;
-		color: #fff;
-		background: #333;
-
-		border-radius: 5px;
-		display: block;
-		margin-right: 7px;
-	}
-
-</style>
-
 {% endblock %}

@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+{% load static %}
+{% if user.is_authenticated %}
+<link href="{% static 'ProyectoSernacApp/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+<link href="{% static 'ProyectoSernacApp/css/foro.css' %}" rel="stylesheet">
 <html>
 <head>
 	<title>
@@ -19,19 +23,30 @@
 
 </body>
 
-<style>
 
-	*{
-		margin: 0;
-		padding: 0;
-	}
-
-	body{
-		background: #f3f3f3;
-	}
-
-
-
-</style>
 
 </html>
+{% else %}
+
+
+{% load static %}
+
+<link href="{% static 'ProyectoSernacApp/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+<link href="{% static 'ProyectoSernacApp/css/signin.css' %}" rel="stylesheet">
+
+<html>
+  <body>
+
+
+    <form class="form-signin" method="post">
+      {% csrf_token %}
+
+      <p><h1 class="text-center w-100">Necesitas iniciar sesion {{ user.username|title}}</h1></p>
+      <p><a class="text-center w-100 btn btn-lg btn-primary" type="submit" href="{% url 'login' %}">Iniciar sesion</a></p>
+      <a class="nav-link text-small text-center" type="submit" href="{% url 'Registro' %}"><u><i>Crear Cuenta</u></i></a>
+
+    </form>
+  </body>
+
+</html>
+{% endif %}
