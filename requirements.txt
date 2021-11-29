@@ -126,7 +126,6 @@ PyJWT==2.3.0
 pyOpenSSL==21.0.0
 pyparsing==3.0.6
 PyPDF2==1.26.0
-pypiwin32==223
 pytest==6.2.5
 python-bidi==0.4.2
 python-crontab==2.6.0
