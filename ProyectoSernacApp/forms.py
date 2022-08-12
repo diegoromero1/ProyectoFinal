@@ -68,6 +68,7 @@ class PasswordChangingForm(PasswordChangeForm):
         fields = ('old_password', 'new_password1', 'new_password2')
 
 
+
 # Diego Romero
 
 class ElegirInlineFormset(forms.BaseInlineFormSet):

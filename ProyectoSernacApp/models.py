@@ -18,7 +18,7 @@ from django.conf import settings
 import random
 
 
-####Mauro Silva el que te lo pone#####
+####Mauro Silva #####
 class Publicacion(models.Model):
     id = models.AutoField(primary_key=True)
     titulo = models.CharField('Titulo', max_length=90, blank=False, null=False)
